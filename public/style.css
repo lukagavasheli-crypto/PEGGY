@@ -1,0 +1,695 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f5ebe2;
+  color: #303030;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ── */
+
+header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 32px 40px 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.peggy-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 36px;
+  font-weight: 700;
+  color: #303030;
+  letter-spacing: -0.72px;
+}
+
+.peggy-icon {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  margin-left: -4px;
+}
+
+.header-right {
+  text-align: right;
+}
+
+.last-updated-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.last-updated-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #303030;
+  letter-spacing: -0.24px;
+}
+
+.last-updated-time {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: #303030;
+  letter-spacing: -0.44px;
+}
+
+/* ── Main columns ── */
+
+main.columns {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  padding: 0 24px 24px;
+  overflow: hidden;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 20px;
+}
+
+/* ── Projects column ── */
+
+.column-projects {
+  flex: 0.9;
+  background: #303030;
+  border-radius: 8px 60px 8px 8px;
+  color: #f5ebe2;
+}
+
+.column-projects .column-header h2 {
+  color: #f5ebe2;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.36px;
+}
+
+/* ── Notifications column ── */
+
+.column-notifications {
+  flex: 1;
+  background: #93a9e2;
+  border-radius: 8px 60px 8px 8px;
+  color: #303030;
+}
+
+.column-notifications .column-header h2 {
+  color: #303030;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.36px;
+}
+
+/* ── Todos column ── */
+
+.column-todos {
+  flex: 1.1;
+  background: transparent;
+  color: #303030;
+  padding-left: 12px;
+}
+
+.column-todos .column-header h2 {
+  color: #303030;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.36px;
+}
+
+/* ── Column header ── */
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.column-header h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.36px;
+}
+
+/* ── Card lists ── */
+
+.card-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.5;
+}
+
+/* ── Project cards ── */
+
+.project-wrapper {
+  animation: slideIn 0.3s ease-out;
+}
+
+.project-wrapper.seen {
+  opacity: 0.45;
+}
+
+.project-card {
+  background: #f5ebe2;
+  border-radius: 20px;
+  padding: 18px 20px 16px;
+  color: #000;
+}
+
+.project-card-top-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.project-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: -0.28px;
+  line-height: 1.2;
+  flex: 1;
+  min-width: 0;
+}
+
+.project-card-dates {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.project-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 2px;
+}
+
+.status-badge {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 50px;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.status-badge.creative-r1 { background: #93a9e2; color: #000; }
+.status-badge.creative-r2 { background: #e54eff; color: #000; }
+.status-badge.final-updates { background: #85e790; color: #000; }
+.status-badge.clear-updates { background: #ffd33e; color: #000; }
+
+.due-date-badge {
+  border-radius: 14px;
+  padding: 8px 16px 10px;
+  text-align: left;
+}
+
+.due-date-badge.due-soon {
+  background: #ffd33e;
+}
+
+.due-date-badge.due-urgent {
+  background: #fc5b31;
+}
+
+.due-date-badge .due-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: -0.18px;
+  display: block;
+}
+
+.due-date-badge .due-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+  letter-spacing: -0.3px;
+  display: block;
+}
+
+.project-card-meta {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.meta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.meta-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: -0.18px;
+}
+
+.meta-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #000;
+  letter-spacing: -0.3px;
+}
+
+/* ── Notification cards ── */
+
+.notif-wrapper {
+  animation: slideIn 0.3s ease-out;
+}
+
+.notif-wrapper.seen {
+  opacity: 0.45;
+}
+
+.notification-card {
+  background: #303030;
+  border-radius: 20px;
+  padding: 18px 20px 20px;
+  color: #f5ebe2;
+}
+
+.notif-top-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar.source-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar.source-logo svg {
+  width: 20px;
+  height: 20px;
+}
+
+.notif-author-block {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 1px;
+}
+
+.tagged-by {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: #f5ebe2;
+  letter-spacing: -0.22px;
+}
+
+.notif-time {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 8px;
+  color: #f5ebe2;
+  letter-spacing: -0.16px;
+  opacity: 0.6;
+}
+
+.file-name-pill {
+  background: #f5ebe2;
+  color: #303030;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 50px;
+  letter-spacing: -0.18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  flex-shrink: 0;
+}
+
+.summary {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f5ebe2;
+  line-height: 1.3;
+  word-break: break-word;
+  letter-spacing: -0.28px;
+}
+
+.notif-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 2px;
+}
+
+/* ── Pill buttons ── */
+
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: -0.18px;
+  transition: opacity 0.15s;
+  text-decoration: none;
+}
+
+.btn-pill:hover {
+  opacity: 0.8;
+}
+
+.btn-pill .icon-x {
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* Project clear button - cream on dark */
+.btn-pill.cream {
+  background: #f5ebe2;
+  color: #303030;
+}
+
+/* Notification clear button - dark on blue */
+.btn-pill.dark {
+  background: #303030;
+  color: #f5ebe2;
+}
+
+/* Todo clear button - cream on yellow */
+.btn-pill.todo-clear {
+  background: #f5ebe2;
+  color: #1a1a1a;
+}
+
+/* Open link button (arrow icon) */
+.btn-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.btn-open:hover {
+  opacity: 0.8;
+}
+
+.btn-open.cream {
+  background: #f5ebe2;
+  color: #303030;
+}
+
+.btn-open.dark {
+  background: #303030;
+  color: #f5ebe2;
+}
+
+/* Expand / check icon buttons in column headers */
+.btn-expand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+
+.btn-expand:hover {
+  opacity: 1;
+}
+
+/* ── Todo cards ── */
+
+.todo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-content: start;
+}
+
+.todo-card {
+  background: #ffd33e;
+  border-radius: 4px 16px 16px 16px;
+  padding: 16px;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: slideIn 0.3s ease-out;
+  color: #303030;
+}
+
+.todo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #303030;
+  line-height: 1.35;
+  word-break: break-word;
+  letter-spacing: -0.24px;
+  flex: 1;
+  margin-bottom: 12px;
+}
+
+.todo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.priority-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 50px;
+  letter-spacing: -0.18px;
+  color: #fff;
+}
+
+.priority-tag.high {
+  background: #fc5b31;
+}
+
+.priority-tag.low {
+  background: #93a9e2;
+}
+
+/* ── Add new button ── */
+
+.btn-add {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 50px;
+  border: none;
+  background: #ffd33e;
+  color: #303030;
+  cursor: pointer;
+  letter-spacing: -0.22px;
+  transition: opacity 0.15s;
+}
+
+.btn-add:hover {
+  opacity: 0.85;
+}
+
+/* ── Todo form ── */
+
+.todo-form {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todo-form.hidden {
+  display: none;
+}
+
+.todo-form input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 50px;
+  border: 2px solid #303030;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  background: #fff;
+  color: #303030;
+  outline: none;
+  letter-spacing: -0.24px;
+}
+
+.todo-form input:focus {
+  border-color: #93a9e2;
+}
+
+.todo-form-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.todo-form select {
+  padding: 6px 12px;
+  border-radius: 50px;
+  border: 2px solid #303030;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  background: #fff;
+  color: #303030;
+  cursor: pointer;
+}
+
+.btn-save {
+  padding: 6px 16px;
+  border-radius: 50px;
+  border: none;
+  background: #85e790;
+  color: #000;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: -0.22px;
+  transition: opacity 0.15s;
+}
+
+.btn-save:hover {
+  opacity: 0.85;
+}
+
+/* ── Footer ── */
+
+footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+  background: #303030;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #f5ebe2;
+  opacity: 0.7;
+}
+
+.divider {
+  opacity: 0.3;
+}
+
+/* ── Animations ── */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Scrollbar ── */
+
+.card-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.card-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-list::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.12);
+  border-radius: 2px;
+}
+
+.column-projects .card-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+}

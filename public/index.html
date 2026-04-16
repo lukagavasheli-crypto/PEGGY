@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEGGY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1 class="peggy-title">PEGGY</h1>
+      <img src="peggy-icon.png" alt="Peggy" class="peggy-icon">
+    </div>
+    <div class="header-right">
+      <div class="last-updated-block">
+        <span class="last-updated-label">Last updated</span>
+        <span id="last-updated" class="last-updated-time">--</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="columns">
+    <!-- Projects column (airtable assignments) -->
+    <section class="column column-projects">
+      <div class="column-header">
+        <h2>Projects</h2>
+        <button id="mark-projects-seen" class="btn-expand" title="Mark all seen">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </div>
+      <div id="projects-list" class="card-list">
+        <div class="empty-state">No project assignments yet.</div>
+      </div>
+    </section>
+
+    <!-- Notifications column (figma + airtable mentions) -->
+    <section class="column column-notifications">
+      <div class="column-header">
+        <h2>Notifications</h2>
+        <button id="mark-notifs-seen" class="btn-expand" title="Mark all seen">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </div>
+      <div id="notifications-list" class="card-list">
+        <div class="empty-state">No notifications yet.</div>
+      </div>
+    </section>
+
+    <!-- To-do list column -->
+    <section class="column column-todos">
+      <div class="column-header">
+        <h2>To do list</h2>
+        <button id="add-todo-btn" class="btn-add">Add new +</button>
+      </div>
+      <div id="todo-form" class="todo-form hidden">
+        <input id="todo-input" type="text" placeholder="What needs doing?" maxlength="200">
+        <div class="todo-form-actions">
+          <select id="todo-priority">
+            <option value="high">High priority</option>
+            <option value="low" selected>Low priority</option>
+          </select>
+          <button id="todo-save" class="btn-save">Save</button>
+        </div>
+      </div>
+      <div id="todos-list" class="card-list todo-grid">
+        <div class="empty-state">No tasks yet. Add one!</div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="status-bar">
+    <span id="figma-status">Figma: connecting...</span>
+    <span class="divider">|</span>
+    <span id="airtable-status">Airtable: connecting...</span>
+    <span class="divider">|</span>
+    <span id="file-count">Files: --</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
