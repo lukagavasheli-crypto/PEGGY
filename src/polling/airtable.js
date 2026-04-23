@@ -4,8 +4,10 @@ const db = require('../db');
 
 const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
 const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
-const AIRTABLE_USER_EMAIL = process.env.AIRTABLE_USER_EMAIL;
+const AIRTABLE_USER_EMAIL = (process.env.AIRTABLE_USER_EMAIL || '').toLowerCase();
 const AIRTABLE_API = 'https://api.airtable.com/v0';
+
+if (!AIRTABLE_USER_EMAIL) console.warn('[airtable] WARNING: AIRTABLE_USER_EMAIL is not set');
 
 const headers = { Authorization: `Bearer ${AIRTABLE_TOKEN}` };
 
@@ -112,7 +114,7 @@ async function pollAssignments(broadcast) {
           const value = fields[cf.name];
           if (!value) continue;
           const collabs = Array.isArray(value) ? value : [value];
-          const isAssigned = collabs.some(c => c.email && c.email.toLowerCase() === AIRTABLE_USER_EMAIL.toLowerCase());
+          const isAssigned = AIRTABLE_USER_EMAIL && collabs.some(c => c.email && c.email.toLowerCase() === AIRTABLE_USER_EMAIL);
           if (isAssigned) {
             assignedRoles.push(cf.name);
           }

@@ -37,6 +37,9 @@ function isAirtableMention(comment, selfEmail) {
     if (AIRTABLE_USER_ID && comment.mentioned[AIRTABLE_USER_ID]) return true;
   }
 
+  // Fallback: plain-text name match (e.g. "Luka and Brian...")
+  if (nameRegex.test(text)) return true;
+
   return false;
 }
 
